@@ -1,0 +1,92 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <attr name="fabBackgroundColor" format="color" />
+    <attr name="fabIconColor" format="color" />
+
+    <!-- Base application theme. -->
+    <style name="Theme.MedicineReminder" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#210054</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <item name="fabBackgroundColor">#210054</item>
+        <item name="fabIconColor">@color/white</item>
+
+        <!-- Normal (Default) Text Appearances -->
+        <item name="textAppearanceTitleLarge">@style/AppHeadline6</item>
+        <item name="textAppearanceHeadlineMedium">@style/AppHeadline5</item>
+        <item name="textAppearanceTitleMedium">@style/AppSubtitle1</item>
+        <item name="textAppearanceBodyLarge">@style/AppBody1</item>
+        <item name="textAppearanceBodySmall">@style/AppBody2</item>
+        <item name="textAppearanceLabelLarge">@style/AppButton</item>
+    </style>
+
+    <!-- Normal (Default) Styles -->
+    <style name="AppHeadline5" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">34sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="AppHeadline6" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">31sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="AppSubtitle1" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="AppBody1" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">25sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="AppBody2" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">25sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="AppButton" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">25sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <!-- Font Size Themes -->
+
+    <!-- Large Settings -->
+    <style name="FontSizeLarge">
+        <item name="textAppearanceHeadlineMedium">@style/AppHeadline5.Large</item>
+        <item name="textAppearanceTitleLarge">@style/AppHeadline6.Large</item>
+        <item name="textAppearanceTitleMedium">@style/AppSubtitle1.Large</item>
+        <item name="textAppearanceBodyLarge">@style/AppBody1.Large</item>
+        <item name="textAppearanceBodySmall">@style/AppBody2.Large</item>
+        <item name="textAppearanceLabelLarge">@style/AppButton.Large</item>
+    </style>
+
+    <style name="AppHeadline5.Large"><item name="android:textSize">38sp</item></style>
+    <style name="AppHeadline6.Large"><item name="android:textSize">34sp</item></style>
+    <style name="AppSubtitle1.Large"><item name="android:textSize">32sp</item></style>
+    <style name="AppBody1.Large"><item name="android:textSize">30sp</item></style>
+    <style name="AppBody2.Large"><item name="android:textSize">25sp</item></style>
+    <style name="AppButton.Large"><item name="android:textSize">30sp</item></style>
+
+    <!-- Extra Large Settings -->
+    <style name="FontSizeExtraLarge">
+        <item name="textAppearanceHeadlineMedium">@style/AppHeadline5.ExtraLarge</item>
+        <item name="textAppearanceTitleLarge">@style/AppHeadline6.ExtraLarge</item>
+        <item name="textAppearanceTitleMedium">@style/AppSubtitle1.ExtraLarge</item>
+        <item name="textAppearanceBodyLarge">@style/AppBody1.ExtraLarge</item>
+        <item name="textAppearanceBodySmall">@style/AppBody2.ExtraLarge</item>
+        <item name="textAppearanceLabelLarge">@style/AppButton.ExtraLarge</item>
+    </style>
+
+    <style name="AppHeadline5.ExtraLarge"><item name="android:textSize">49sp</item></style>
+    <style name="AppHeadline6.ExtraLarge"><item name="android:textSize">45sp</item></style>
+    <style name="AppSubtitle1.ExtraLarge"><item name="android:textSize">42sp</item></style>
+    <style name="AppBody1.ExtraLarge"><item name="android:textSize">39sp</item></style>
+    <style name="AppBody2.ExtraLarge"><item name="android:textSize">34sp</item></style>
+    <style name="AppButton.ExtraLarge"><item name="android:textSize">39sp</item></style>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.SettingsActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Appearance"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchDarkMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dark Mode"
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Font Size"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupFontSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/radioNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:textAppearance="?attr/textAppearanceBodyLarge" />
+            <RadioButton
+                android:id="@+id/radioLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Large"
+                android:textAppearance="?attr/textAppearanceBodyLarge" />
+            <RadioButton
+                android:id="@+id/radioExtraLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X Large (for tablets)"
+                android:textAppearance="?attr/textAppearanceBodyLarge" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchVibration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enable Vibration"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:checked="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Back to Main"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:textAppearance="?attr/textAppearanceLabelLarge" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Medicine Reminder</string>
+    <string name="no_medicines">No medicines added yet.</string>
+    <string name="add_medicine">Add Medicine</string>
+    <string name="edit_medicine">Edit Medicine</string>
+    <string name="medicine_name">Medicine Name</string>
+    <string name="time">Time</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="time_picker_title">Select time</string>
+    <string name="notification_channel_name">Medicine Reminders</string>
+    <string name="notification_channel_description">Shows reminders for medicines</string>
+    <string name="notification_title">Time to take medicine</string>
+    <string name="notification_text">It\'s time to take %s</string>
+</resources>

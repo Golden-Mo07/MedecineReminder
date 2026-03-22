@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="70dp"
+    android:height="70dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <group
+        android:translateX="30"
+        android:translateY="47">
+        <!-- Capsule Outline part (Top Right) -->
+        <path
+            android:pathData="M52.3,38.2 L74.7,15.8 C80.9,9.6 90.9,9.6 97.1,15.8 C103.3,22 103.3,32.1 97.1,38.2 L74.7,60.6"
+            android:strokeColor="#1FA1E0"
+            android:strokeWidth="6"
+            android:strokeLineCap="round" />
+
+        <!-- Capsule Solid part (Bottom Left) -->
+        <path
+            android:pathData="M52.3,38.2 L30,60.5 C23.8,66.7 23.8,76.8 30,83 C36.2,89.2 46.2,89.2 52.4,83 L74.7,60.6 Z"
+            android:fillColor="#1FA1E0" />
+
+        <!-- Round Pill (Bottom Right) -->
+        <path
+            android:pathData="M80,80 m-18,0 a18,18 0,1 1,36 0 a18,18 0,1 1,-36 0"
+            android:fillColor="#1FA1E0" />
+        <!-- Score line on round pill -->
+        <path
+            android:pathData="M67,93 L93,67"
+            android:strokeColor="#000000"
+            android:strokeWidth="2.5"
+            android:strokeLineCap="round"
+            android:strokeAlpha="0.5" />
+    </group>
+
+</vector>

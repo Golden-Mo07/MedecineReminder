@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchDarkMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dark Mode"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Font Size"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupFontSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radioSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small" />
+        <RadioButton
+            android:id="@+id/radioNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal" />
+        <RadioButton
+            android:id="@+id/radioLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large" />
+        <RadioButton
+            android:id="@+id/radioExtraLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Extra Large" />
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchVibration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Vibration"
+        android:textSize="16sp"
+        android:checked="true" />
+
+</LinearLayout>
