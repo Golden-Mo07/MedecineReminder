@@ -65,6 +65,45 @@
                 android:textAppearance="?attr/textAppearanceBodyLarge" />
         </RadioGroup>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note: Normal font size can be adjusted from the phone settings"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="4dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Backup"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonBackup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Export Backup"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonRestore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Import Backup"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:textAppearance="?attr/textAppearanceBodyLarge" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

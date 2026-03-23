@@ -12,6 +12,9 @@ interface MedicineDao {
     @Query("SELECT * FROM medicines ORDER BY time")
     fun getAllMedicines(): Flow<List<Medicine>>
 
+    @Query("SELECT * FROM medicines")
+    suspend fun getAllMedicinesSync(): List<Medicine>
+
     @Query("SELECT * FROM medicines WHERE isInterval = 1")
     fun getIntervalMedicines(): Flow<List<Medicine>>
 

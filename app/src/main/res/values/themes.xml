@@ -25,32 +25,32 @@
 
     <!-- Normal (Default) Styles -->
     <style name="AppHeadline5" parent="TextAppearance.Material3.HeadlineMedium">
-        <item name="android:textSize">34sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="AppHeadline6" parent="TextAppearance.Material3.TitleLarge">
-        <item name="android:textSize">31sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="AppSubtitle1" parent="TextAppearance.Material3.TitleMedium">
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="AppBody1" parent="TextAppearance.Material3.BodyLarge">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="AppBody2" parent="TextAppearance.Material3.BodySmall">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="AppButton" parent="TextAppearance.Material3.LabelLarge">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
@@ -66,12 +66,12 @@
         <item name="textAppearanceLabelLarge">@style/AppButton.Large</item>
     </style>
 
-    <style name="AppHeadline5.Large"><item name="android:textSize">38sp</item></style>
-    <style name="AppHeadline6.Large"><item name="android:textSize">34sp</item></style>
-    <style name="AppSubtitle1.Large"><item name="android:textSize">32sp</item></style>
-    <style name="AppBody1.Large"><item name="android:textSize">30sp</item></style>
-    <style name="AppBody2.Large"><item name="android:textSize">25sp</item></style>
-    <style name="AppButton.Large"><item name="android:textSize">30sp</item></style>
+    <style name="AppHeadline5.Large"><item name="android:textSize">28sp</item></style>
+    <style name="AppHeadline6.Large"><item name="android:textSize">24sp</item></style>
+    <style name="AppSubtitle1.Large"><item name="android:textSize">22sp</item></style>
+    <style name="AppBody1.Large"><item name="android:textSize">20sp</item></style>
+    <style name="AppBody2.Large"><item name="android:textSize">18sp</item></style>
+    <style name="AppButton.Large"><item name="android:textSize">18sp</item></style>
 
     <!-- Extra Large Settings -->
     <style name="FontSizeExtraLarge">
@@ -83,10 +83,10 @@
         <item name="textAppearanceLabelLarge">@style/AppButton.ExtraLarge</item>
     </style>
 
-    <style name="AppHeadline5.ExtraLarge"><item name="android:textSize">49sp</item></style>
-    <style name="AppHeadline6.ExtraLarge"><item name="android:textSize">45sp</item></style>
-    <style name="AppSubtitle1.ExtraLarge"><item name="android:textSize">42sp</item></style>
-    <style name="AppBody1.ExtraLarge"><item name="android:textSize">39sp</item></style>
-    <style name="AppBody2.ExtraLarge"><item name="android:textSize">34sp</item></style>
-    <style name="AppButton.ExtraLarge"><item name="android:textSize">39sp</item></style>
+    <style name="AppHeadline5.ExtraLarge"><item name="android:textSize">32sp</item></style>
+    <style name="AppHeadline6.ExtraLarge"><item name="android:textSize">28sp</item></style>
+    <style name="AppSubtitle1.ExtraLarge"><item name="android:textSize">26sp</item></style>
+    <style name="AppBody1.ExtraLarge"><item name="android:textSize">24sp</item></style>
+    <style name="AppBody2.ExtraLarge"><item name="android:textSize">22sp</item></style>
+    <style name="AppButton.ExtraLarge"><item name="android:textSize">22sp</item></style>
 </resources>

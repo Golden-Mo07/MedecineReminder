@@ -16,6 +16,7 @@ import com.example.medicinereminder.data.MedicineDatabase
 import com.example.medicinereminder.data.MedicineRepository
 import com.example.medicinereminder.databinding.ActivityAddEditMedicineBinding
 import com.example.medicinereminder.receiver.AlarmReceiver
+import com.example.medicinereminder.widget.MedicineWidgetProvider
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -154,6 +155,9 @@ class AddEditMedicineActivity : BaseActivity() {
             val savedMedicine = medicine.copy(id = id)
             scheduleAlarm(savedMedicine)
             
+            // Update the widget
+            MedicineWidgetProvider.updateWidget(this@AddEditMedicineActivity)
+            
             finish()
         }
     }
@@ -164,6 +168,9 @@ class AddEditMedicineActivity : BaseActivity() {
             if (medicine != null) {
                 repository.delete(medicine)
                 cancelAlarm(medicine)
+                
+                // Update the widget
+                MedicineWidgetProvider.updateWidget(this@AddEditMedicineActivity)
             }
             finish()
         }
