@@ -2,7 +2,7 @@ package com.example.medicinereminder.widget
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
+import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.example.medicinereminder.R
@@ -50,6 +50,7 @@ class MedicineRemoteViewsFactory(private val context: Context) : RemoteViewsServ
         // Apply theme colors to the item views
         views.setTextColor(R.id.widget_item_name, textColor)
         views.setTextColor(R.id.widget_item_time, subTextColor)
+        views.setTextColor(R.id.widget_item_comment, subTextColor)
         
         views.setTextViewText(R.id.widget_item_name, medicine.name)
         
@@ -59,6 +60,13 @@ class MedicineRemoteViewsFactory(private val context: Context) : RemoteViewsServ
             "At ${medicine.time}"
         }
         views.setTextViewText(R.id.widget_item_time, timeText)
+
+        if (medicine.comment.isNotEmpty()) {
+            views.setTextViewText(R.id.widget_item_comment, medicine.comment)
+            views.setViewVisibility(R.id.widget_item_comment, View.VISIBLE)
+        } else {
+            views.setViewVisibility(R.id.widget_item_comment, View.GONE)
+        }
 
         return views
     }

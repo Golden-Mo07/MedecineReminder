@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
@@ -50,14 +52,13 @@ class SettingsActivity : BaseActivity() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             sharedPrefs.edit().putBoolean("dark_mode", isChecked).apply()
             
-            // Set night mode immediately - this will recreate the activity
+            // Set night mode immediately
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             
-            // Update widget to reflect theme change
             MedicineWidgetProvider.updateWidget(this)
         }
 
@@ -88,6 +89,29 @@ class SettingsActivity : BaseActivity() {
         binding.switchVibration.setOnCheckedChangeListener { _, isChecked ->
             sharedPrefs.edit().putBoolean("vibration", isChecked).apply()
         }
+
+        // Custom Notification Text
+        val customTitle = sharedPrefs.getString("notification_title", getString(R.string.notification_title))
+        val customMessage = sharedPrefs.getString("notification_message", getString(R.string.notification_text_prefix))
+        
+        binding.editTextNotificationTitle.setText(customTitle)
+        binding.editTextNotificationMessage.setText(customMessage)
+
+        binding.editTextNotificationTitle.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                sharedPrefs.edit().putString("notification_title", s.toString()).apply()
+            }
+        })
+
+        binding.editTextNotificationMessage.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                sharedPrefs.edit().putString("notification_message", s.toString()).apply()
+            }
+        })
 
         binding.buttonBack.setOnClickListener { finish() }
     }
@@ -136,24 +160,17 @@ class SettingsActivity : BaseActivity() {
     private fun importBackup(uri: Uri) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Get the DB file path
                 val dbFile = getDatabasePath("medicine_database")
-                
-                // Close the database properly before overwriting
                 MedicineDatabase.getInstance(this@SettingsActivity).close()
 
-                // Copy the backup file to the database location
                 contentResolver.openInputStream(uri)?.use { input ->
                     FileOutputStream(dbFile).use { output ->
                         input.copyTo(output)
                     }
                 }
 
-                // Force re-initialization of the database
                 val db = MedicineDatabase.getInstance(this@SettingsActivity)
                 val medicines = db.medicineDao().getAllMedicinesSync()
-                
-                // Reschedule all alarms
                 medicines.forEach { AlarmUtils.scheduleAlarm(this@SettingsActivity, it) }
 
                 withContext(Dispatchers.Main) {

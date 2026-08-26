@@ -11,5 +11,6 @@ data class Medicine(
     val time: String = "", // stored as "HH:mm" (24-hour format) for FIXED type
     val isInterval: Boolean = false,
     val intervalMinutes: Int = 0, // for INTERVAL type
-    val lastTriggeredTime: Long = System.currentTimeMillis() // To calculate time left
+    val lastTriggeredTime: Long = System.currentTimeMillis(), // To calculate time left
+    val comment: String = "" // Optional notes (e.g., "Take with food")
 )

@@ -2,6 +2,7 @@ package com.example.medicinereminder
 
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.viewpager2.widget.ViewPager2
 import com.example.medicinereminder.adapter.MainPagerAdapter
 import com.example.medicinereminder.databinding.ActivityMainBinding
@@ -22,6 +23,7 @@ class MainActivity : BaseActivity() {
         }
 
         setupViewPager()
+        setupBackNavigation()
     }
 
     private fun setupViewPager() {
@@ -31,5 +33,20 @@ class MainActivity : BaseActivity() {
         
         // Open the app on the standard medicine list (index 1)
         binding.viewPager.setCurrentItem(1, false)
+    }
+
+    private fun setupBackNavigation() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // If we are on the Interval Reminders page (index 0), go back to Main page (index 1)
+                if (binding.viewPager.currentItem == 0) {
+                    binding.viewPager.setCurrentItem(1, true)
+                } else {
+                    // If we are already on index 1, exit the app
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
     }
 }

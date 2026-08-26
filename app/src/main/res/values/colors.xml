@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="Turquoise_200">#DE196B80</color>
+    <color name="Turquoise_500">#E9196B80</color>
+    <color name="Turquoise_700">#196B80</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="fab_background_light">#210054</color>
+    <!-- Main Brand Color -->
+    <color name="brand_primary">#007694</color>
+    <color name="reminder_bg">#007694</color>
+
+    <color name="fab_background_light">#007694</color>
     <color name="fab_icon_light">#FFFFFF</color>
 
-    <color name="fab_background_dark">#210054</color>
+    <color name="fab_background_dark">#007694</color>
     <color name="fab_icon_dark">#FFFFFF</color>
 
     <!-- Widget Colors Light (Default) -->
     <color name="widget_bg">#F2F2F7</color>
     <color name="widget_text_main">#1C1C1E</color>
-    <color name="widget_text_sub">#6C6C70</color>
+    <color name="widget_text_sub">#CC196B80</color>
     <color name="widget_item_bg">#FFFFFF</color>
-    <color name="widget_accent">#210054</color>
+    <color name="widget_accent">#007694</color>
 
     <!-- Specific Widget Colors Light -->
     <color name="widget_bg_light">#F2F2F7</color>
     <color name="widget_text_main_light">#1C1C1E</color>
-    <color name="widget_text_sub_light">#6C6C70</color>
+    <color name="widget_text_sub_light">#196B80</color>
     <color name="widget_item_bg_light">#FFFFFF</color>
-    <color name="widget_accent_light">#210054</color>
+    <color name="widget_accent_light">#007694</color>
     <color name="widget_item_stroke_light">#C6C6C8</color>
 
     <!-- Specific Widget Colors Dark -->
     <color name="widget_bg_dark">#1C1B1F</color>
     <color name="widget_text_main_dark">#E6E1E5</color>
     <color name="widget_text_sub_dark">#CAC4D0</color>
-    <color name="widget_item_bg_dark">#49454F</color>
-    <color name="widget_accent_dark">#D0BCFF</color>
+    <color name="widget_item_bg_dark">#196B80</color>
+    <color name="widget_accent_dark">#E7196B80</color>
     <color name="widget_item_stroke_dark">#333333</color>
 </resources>

@@ -15,7 +15,7 @@ class NotificationHelper(private val context: Context) {
 
     companion object {
         const val CHANNEL_ID = "medicine_reminder_channel"
-        const val NOTIFICATION_ID = 1001
+        const val BASE_NOTIFICATION_ID = 1000
     }
 
     init {
@@ -35,24 +35,37 @@ class NotificationHelper(private val context: Context) {
         }
     }
 
-    fun showNotification(medicineName: String) {
+    fun showNotification(medicineId: Int, medicineName: String, comment: String = "") {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent,
+            context, medicineId, intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        val sharedPrefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val customTitle = sharedPrefs.getString("notification_title", context.getString(R.string.notification_title))
+        val customPrefix = sharedPrefs.getString("notification_message", context.getString(R.string.notification_text_prefix))
+
+        val message = "$customPrefix $medicineName".trim()
+        val contentText = if (comment.isNotEmpty()) {
+            "$message\n$comment"
+        } else {
+            message
+        }
+
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.ic_dialog_info) // Replace with your own icon
-            .setContentTitle(context.getString(R.string.notification_title))
-            .setContentText(context.getString(R.string.notification_text, medicineName))
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentTitle(customTitle)
+            .setContentText(contentText)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(contentText))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
 
-        notificationManager.notify(NOTIFICATION_ID, notification)
+        // Use medicineId to allow multiple distinct notifications
+        notificationManager.notify(BASE_NOTIFICATION_ID + medicineId, notification)
     }
 }

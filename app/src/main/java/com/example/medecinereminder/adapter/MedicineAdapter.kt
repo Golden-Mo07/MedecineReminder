@@ -1,6 +1,7 @@
 package com.example.medicinereminder.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -26,6 +27,14 @@ class MedicineAdapter(private val onItemClick: (Medicine) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(medicine: Medicine) {
             binding.textViewName.text = medicine.name
+            
+            if (medicine.comment.isNotEmpty()) {
+                binding.textViewComment.text = medicine.comment
+                binding.textViewComment.visibility = View.VISIBLE
+            } else {
+                binding.textViewComment.visibility = View.GONE
+            }
+
             if (medicine.isInterval) {
                 if (medicine.intervalMinutes >= 60) {
                     val hours = medicine.intervalMinutes / 60

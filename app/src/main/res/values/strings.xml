@@ -13,4 +13,9 @@
     <string name="notification_channel_description">Shows reminders for medicines</string>
     <string name="notification_title">Time to take medicine</string>
     <string name="notification_text">It\'s time to take %s</string>
+    <string name="notification_text_prefix">It\'s time to take</string>
+    <string name="comment_label">Comment (Optional)</string>
+    <string name="comment_hint">e.g., Take with food or Avoid milk</string>
+    <string name="first_dose_at">Starting from</string>
+    <string name="repeat_every">Repeat Every</string>
 </resources>

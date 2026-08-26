@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 
-@Database(entities = [Medicine::class], version = 3, exportSchema = false)
+@Database(entities = [Medicine::class], version = 4, exportSchema = false)
 abstract class MedicineDatabase : RoomDatabase() {
     abstract fun medicineDao(): MedicineDao
 

@@ -1,11 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Refined Dark Mode Theme for Medicine Reminder -->
     <style name="Theme.MedicineReminder" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <item name="colorPrimary">#210054</item>
+        <!-- Primary brand color -->
+        <item name="colorPrimary">#007694</item>
         <item name="colorOnPrimary">@color/white</item>
 
-        <item name="fabBackgroundColor">@color/fab_background_dark</item>
-        <item name="fabIconColor">@color/fab_icon_dark</item>
+        <!-- Use a deep teal-tinted background for dark mode harmony -->
+        <item name="android:windowBackground">#001F25</item>
+        <item name="colorSurface">#001F25</item>
+        <item name="colorSurfaceVariant">#3F484B</item>
+        <item name="colorOnSurface">#E1E3E4</item>
+        <item name="colorOnSurfaceVariant">#BFC8CA</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">#007694</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Tonal button colors (Cancel, Import, Export) - Refined for Dark Mode -->
+        <item name="colorSecondaryContainer">#004D5A</item>
+        <item name="colorOnSecondaryContainer">#BEE9F1</item>
+
+        <!-- Floating Action Button attributes -->
+        <item name="fabBackgroundColor">#007694</item>
+        <item name="fabIconColor">@color/white</item>
+
+        <!-- Maintain font consistency with the main theme -->
+        <item name="textAppearanceTitleLarge">@style/AppHeadline6</item>
+        <item name="textAppearanceHeadlineMedium">@style/AppHeadline5</item>
+        <item name="textAppearanceTitleMedium">@style/AppSubtitle1</item>
+        <item name="textAppearanceBodyLarge">@style/AppBody1</item>
+        <item name="textAppearanceBodySmall">@style/AppBody2</item>
+        <item name="textAppearanceLabelLarge">@style/AppButton</item>
     </style>
 </resources>

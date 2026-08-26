@@ -24,4 +24,13 @@
         android:textSize="14sp"
         android:layout_marginTop="2dp" />
 
+    <TextView
+        android:id="@+id/widget_item_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/widget_text_sub"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:visibility="gone" />
+
 </LinearLayout>

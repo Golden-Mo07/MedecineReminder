@@ -1,11 +1,6 @@
 package com.example.medicinereminder.ui
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.TimePickerDialog
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -15,7 +10,7 @@ import com.example.medicinereminder.data.Medicine
 import com.example.medicinereminder.data.MedicineDatabase
 import com.example.medicinereminder.data.MedicineRepository
 import com.example.medicinereminder.databinding.ActivityAddEditMedicineBinding
-import com.example.medicinereminder.receiver.AlarmReceiver
+import com.example.medicinereminder.utils.AlarmUtils
 import com.example.medicinereminder.widget.MedicineWidgetProvider
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -25,8 +20,14 @@ class AddEditMedicineActivity : BaseActivity() {
     private lateinit var binding: ActivityAddEditMedicineBinding
     private lateinit var repository: MedicineRepository
     private var medicineId: Int = 0
+    
+    // Fixed Time selection
     private var selectedHour = 8
     private var selectedMinute = 0
+
+    // Interval Start Time selection
+    private var intervalStartHour = 8
+    private var intervalStartMinute = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,7 @@ class AddEditMedicineActivity : BaseActivity() {
         repository = MedicineRepository(db.medicineDao())
 
         setupNumberPickers()
+        setupDefaultTimes()
 
         // Check if we are editing
         medicineId = intent.getIntExtra("medicine_id", 0)
@@ -58,7 +60,8 @@ class AddEditMedicineActivity : BaseActivity() {
             }
         }
 
-        binding.editTextTime.setOnClickListener { showTimePicker() }
+        binding.editTextTime.setOnClickListener { showFixedTimePicker() }
+        binding.editTextIntervalStartTime.setOnClickListener { showIntervalStartTimePicker() }
         binding.buttonSave.setOnClickListener { saveMedicine() }
         binding.buttonDelete.setOnClickListener { deleteMedicine() }
         binding.buttonCancel.setOnClickListener { finish() }
@@ -77,17 +80,37 @@ class AddEditMedicineActivity : BaseActivity() {
         }
     }
 
+    private fun setupDefaultTimes() {
+        val now = Calendar.getInstance()
+        selectedHour = now.get(Calendar.HOUR_OF_DAY)
+        selectedMinute = now.get(Calendar.MINUTE)
+        
+        intervalStartHour = selectedHour
+        intervalStartMinute = selectedMinute
+        
+        binding.editTextTime.setText(String.format("%02d:%02d", selectedHour, selectedMinute))
+        binding.editTextIntervalStartTime.setText(String.format("%02d:%02d", intervalStartHour, intervalStartMinute))
+    }
+
     private fun loadMedicine() {
         lifecycleScope.launch {
             val medicine = repository.getMedicineById(medicineId)
             if (medicine != null) {
                 binding.editTextName.setText(medicine.name)
+                binding.editTextComment.setText(medicine.comment)
                 if (medicine.isInterval) {
                     binding.radioInterval.isChecked = true
                     val hours = medicine.intervalMinutes / 60
                     val minutes = medicine.intervalMinutes % 60
                     binding.numberPickerHours.value = hours
                     binding.numberPickerMinutes.value = minutes
+                    
+                    // For intervals, we use the lastTriggeredTime (which stores the schedule base)
+                    val cal = Calendar.getInstance()
+                    cal.timeInMillis = medicine.lastTriggeredTime + (medicine.intervalMinutes * 60 * 1000L)
+                    intervalStartHour = cal.get(Calendar.HOUR_OF_DAY)
+                    intervalStartMinute = cal.get(Calendar.MINUTE)
+                    binding.editTextIntervalStartTime.setText(String.format("%02d:%02d", intervalStartHour, intervalStartMinute))
                 } else {
                     binding.radioFixed.isChecked = true
                     binding.editTextTime.setText(medicine.time)
@@ -101,7 +124,7 @@ class AddEditMedicineActivity : BaseActivity() {
         }
     }
 
-    private fun showTimePicker() {
+    private fun showFixedTimePicker() {
         TimePickerDialog(this, { _, hourOfDay, minute ->
             selectedHour = hourOfDay
             selectedMinute = minute
@@ -109,8 +132,17 @@ class AddEditMedicineActivity : BaseActivity() {
         }, selectedHour, selectedMinute, true).show()
     }
 
+    private fun showIntervalStartTimePicker() {
+        TimePickerDialog(this, { _, hourOfDay, minute ->
+            intervalStartHour = hourOfDay
+            intervalStartMinute = minute
+            binding.editTextIntervalStartTime.setText(String.format("%02d:%02d", hourOfDay, minute))
+        }, intervalStartHour, intervalStartMinute, true).show()
+    }
+
     private fun saveMedicine() {
         val name = binding.editTextName.text.toString().trim()
+        val comment = binding.editTextComment.text.toString().trim()
         val isInterval = binding.radioInterval.isChecked
         
         if (name.isEmpty()) {
@@ -128,13 +160,24 @@ class AddEditMedicineActivity : BaseActivity() {
                     Toast.makeText(this@AddEditMedicineActivity, "Interval cannot be 0", Toast.LENGTH_SHORT).show()
                     return@launch
                 }
+
+                // Calculate base time from chosen "Starting from"
+                val startCal = Calendar.getInstance()
+                startCal.set(Calendar.HOUR_OF_DAY, intervalStartHour)
+                startCal.set(Calendar.MINUTE, intervalStartMinute)
+                startCal.set(Calendar.SECOND, 0)
+                startCal.set(Calendar.MILLISECOND, 0)
+                
+                // We set lastTriggeredTime such that lastTriggeredTime + totalMinutes = Starting from time
+                val baseTime = startCal.timeInMillis - (totalMinutes * 60 * 1000L)
                 
                 Medicine(
                     id = medicineId, 
                     name = name, 
+                    comment = comment,
                     isInterval = true, 
                     intervalMinutes = totalMinutes,
-                    lastTriggeredTime = System.currentTimeMillis()
+                    lastTriggeredTime = baseTime
                 )
             } else {
                 val time = binding.editTextTime.text.toString().trim()
@@ -142,7 +185,13 @@ class AddEditMedicineActivity : BaseActivity() {
                     Toast.makeText(this@AddEditMedicineActivity, "Please enter time", Toast.LENGTH_SHORT).show()
                     return@launch
                 }
-                Medicine(id = medicineId, name = name, time = time, isInterval = false)
+                Medicine(
+                    id = medicineId, 
+                    name = name, 
+                    comment = comment,
+                    time = time, 
+                    isInterval = false
+                )
             }
 
             val id = if (medicineId == 0) {
@@ -153,7 +202,7 @@ class AddEditMedicineActivity : BaseActivity() {
             }
             
             val savedMedicine = medicine.copy(id = id)
-            scheduleAlarm(savedMedicine)
+            AlarmUtils.scheduleAlarm(this@AddEditMedicineActivity, savedMedicine)
             
             // Update the widget
             MedicineWidgetProvider.updateWidget(this@AddEditMedicineActivity)
@@ -167,69 +216,12 @@ class AddEditMedicineActivity : BaseActivity() {
             val medicine = repository.getMedicineById(medicineId)
             if (medicine != null) {
                 repository.delete(medicine)
-                cancelAlarm(medicine)
+                AlarmUtils.cancelAlarm(this@AddEditMedicineActivity, medicine)
                 
                 // Update the widget
                 MedicineWidgetProvider.updateWidget(this@AddEditMedicineActivity)
             }
             finish()
-        }
-    }
-
-    private fun scheduleAlarm(medicine: Medicine) {
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java).apply {
-            putExtra("medicine_name", medicine.name)
-            putExtra("medicine_id", medicine.id)
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            this,
-            medicine.id,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val calendar = Calendar.getInstance()
-        if (medicine.isInterval) {
-            val intervalMillis = medicine.intervalMinutes * 60 * 1000L
-            alarmManager.setRepeating(
-                AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis() + intervalMillis,
-                intervalMillis,
-                pendingIntent
-            )
-        } else {
-            val parts = medicine.time.split(":")
-            calendar.set(Calendar.HOUR_OF_DAY, parts[0].toInt())
-            calendar.set(Calendar.MINUTE, parts[1].toInt())
-            calendar.set(Calendar.SECOND, 0)
-            if (calendar.before(Calendar.getInstance())) {
-                calendar.add(Calendar.DAY_OF_YEAR, 1)
-            }
-            
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (alarmManager.canScheduleExactAlarms()) {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-                } else {
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-                }
-            } else {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-            }
-        }
-    }
-
-    private fun cancelAlarm(medicine: Medicine) {
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            this,
-            medicine.id,
-            intent,
-            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
-        )
-        if (pendingIntent != null) {
-            alarmManager.cancel(pendingIntent)
         }
     }
 }
